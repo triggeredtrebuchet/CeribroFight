@@ -32,6 +32,8 @@ public class MainFrame extends JFrame{
 	PanelMapa panelMapa = new PanelMapa(this.kolorPaneluMapa, this.kolorSrodka);
 	PanelInfo panelInfo = new PanelInfo(this, this.kolorSrodka, this.kolorPaneluPostacie, this.kolorPaneluAkcje);
 	
+	public static Postac aktywnaPostac; // niebezpieczne, ale za to jakie skuteczne
+
 	public MainFrame(){
 		
 		ImageIcon image = new ImageIcon("logowalka.png");
@@ -79,5 +81,5 @@ public class MainFrame extends JFrame{
 		System.out.println(p);
 		System.out.println(a);
 	}
-
+	
 }

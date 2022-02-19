@@ -71,12 +71,12 @@ public class PanelInfo extends JPanel implements ActionListener{
 		if(!this.panelAkcje.wyswietlaReakcje) {
 		for(int i = 1; i< this.panelAkcje.getComponentCount(); i++) {
 			if(e.getSource().equals(this.panelAkcje.getComponent(i)))
-				this.mainFrame.wyslijZapytanie(this.panelAkcje.aktywnaPostac, this.panelAkcje.aktywnaPostac.getDostepneAkcje().get(i-1));
+				this.mainFrame.wyslijZapytanie(MainFrame.aktywnaPostac, MainFrame.aktywnaPostac.getDostepneAkcje().get(i-1));
 		}}
 		else {
 			for(int i = 1; i< this.panelAkcje.getComponentCount(); i++) {
 				if(e.getSource().equals(this.panelAkcje.getComponent(i)))
-					this.mainFrame.wyslijZapytanie(this.panelAkcje.aktywnaPostac, this.panelAkcje.aktywnaPostac.getDostepneReakcje().get(i-1));
+					this.mainFrame.wyslijZapytanie(MainFrame.aktywnaPostac, MainFrame.aktywnaPostac.getDostepneReakcje().get(i-1));
 		}}
 		
 		

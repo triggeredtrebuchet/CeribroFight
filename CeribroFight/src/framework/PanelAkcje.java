@@ -25,7 +25,6 @@ public class PanelAkcje extends JPanel{
 	
 	Color color1 = new Color(60,20,50);
     Color color2 = new Color(31,40,102);
-    Postac aktywnaPostac;
     ActionListener panelInfo;
     boolean wyswietlaReakcje = false;
 	
@@ -44,7 +43,7 @@ public class PanelAkcje extends JPanel{
 		this.removeAll();
 		
 		this.wyswietlaReakcje = false;
-		this.aktywnaPostac = postac;
+		MainFrame.aktywnaPostac = postac;
 		JLabel nazwaPostaci = new JLabel();
 		nazwaPostaci.setText(postac.getNazwa());
 		nazwaPostaci.setForeground(Color.WHITE);
@@ -67,7 +66,7 @@ public class PanelAkcje extends JPanel{
 		this.removeAll();
 		
 		this.wyswietlaReakcje = true;
-		this.aktywnaPostac = postac;
+		MainFrame.aktywnaPostac = postac;
 		JLabel nazwaPostaci = new JLabel();
 		nazwaPostaci.setText(postac.getNazwa());
 		nazwaPostaci.setForeground(Color.WHITE);

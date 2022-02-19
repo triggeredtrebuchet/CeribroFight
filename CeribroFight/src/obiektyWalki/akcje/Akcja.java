@@ -12,8 +12,7 @@ import obiektyWalki.Postac;
 
 public interface Akcja {
 	
-	String nazwa = "Akcja";
-	
+	String nazwa = "Akcja";	
 	/*
 	 * Pola do zaimplementowania
 	 * int kosztakcje

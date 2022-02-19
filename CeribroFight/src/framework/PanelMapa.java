@@ -8,6 +8,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -22,7 +24,7 @@ import obiektyWalki.Postac;
  * TODO dodac metode wyswietlajaca pole razenia dzierzonej broni
  */
 
-public class PanelMapa extends JLayeredPane{
+public class PanelMapa extends JLayeredPane implements MouseListener{
 	
 	Color color1 = new Color(60,10,20);
     Color color2 = new Color(60,20,50);
@@ -35,6 +37,7 @@ public class PanelMapa extends JLayeredPane{
 		this.color2 = kolor2;
 		this.setPreferredSize(new Dimension(600,600));
 		this.setLayout(null);
+		this.addMouseListener(this);
 
 	}
 	
@@ -99,5 +102,37 @@ public class PanelMapa extends JLayeredPane{
 			g2d.fillArc(dx + p.pozX - this.wielkoscPostaci/2, dy + p.pozY - this.wielkoscPostaci/2, this.wielkoscPostaci, this.wielkoscPostaci, a, katP);
 		}	
     }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		MainFrame.aktywnaPostac.pozAlpha = -Math.atan2(e.getLocationOnScreen().getY() - MainFrame.aktywnaPostac.pozY, e.getLocationOnScreen().getX() - MainFrame.aktywnaPostac.pozX);
+		this.update();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

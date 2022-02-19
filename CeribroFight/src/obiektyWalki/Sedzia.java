@@ -38,6 +38,7 @@ public class Sedzia {
 		ChangeLog changeLog = new ChangeLog();
 		/*
 		 * zapytanie o Wykonbanie Akcji bedzie najczesciej wykorzystywana meteda przez framework
+		 * 
 		 */
 		if (!this.zaleglyChangeLog.equals(null)) {
 			changeLog.nieZapytanoOWykonanieKoniecznejReakcji = true;
@@ -69,7 +70,7 @@ public class Sedzia {
 		}
 		else
 			changeLog.wprowadzZmiany();
-		
+		wykonawca.zaplacZaAkcje(akcja);
 		return changeLog;
 	}
 	
