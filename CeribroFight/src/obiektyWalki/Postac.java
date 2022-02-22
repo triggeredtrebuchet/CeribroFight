@@ -20,6 +20,7 @@ public class Postac {
 	private int maxIloscAkcjiR = 2;
 	private int maxIloscAkcjiL = 1;
 	private int iloscReakcji = 0;
+	private int maxIloscReakcji = 1;
 	
 	private int hP = 0;
 	private int garda = 0;
@@ -28,6 +29,9 @@ public class Postac {
 	private int maxHP = 0;
 	private int maxGarda = 0;
 	private int maxZimnaKrew = 0;
+	
+	private int zakresRuchu = 5;
+	
 	private Cechy cechy = new Cechy(); //zawiera talenty i ich rozwiniecia
 	public Bron prawareka = new Bron();
 	public Bron lewareka = new Bron();
@@ -36,6 +40,7 @@ public class Postac {
 	
 	private ArrayList<Akcja> dostepneAkcje = new ArrayList<Akcja>() {{
 		add(new AtakStandardowy());
+		add(new Ruch());
 	}};
 	
 	private ArrayList<Akcja> dostepneReakcje = new ArrayList<Akcja>() {{
@@ -59,6 +64,12 @@ public class Postac {
 		this.hP = this.maxHP;
 		this.garda = this.maxGarda;
 		this.zimnaKrew = this.maxZimnaKrew;
+		
+		try {
+			this.zakresRuchu = cechy.suma("ZW") + 2;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		this.cechy = cechy;
 		this.prawareka = prawas;
@@ -251,6 +262,14 @@ public class Postac {
 		return dostepneReakcje;
 	}
 	
+	public int getZakresRuchu() {
+		return zakresRuchu;
+	}
+
+	public void setZakresRuchu(int zakresRuchu) {
+		this.zakresRuchu = zakresRuchu;
+	}
+
 	public void dodajReakcje(Akcja reakcja) {
 		this.dostepneReakcje.add(reakcja);
 	}
@@ -261,29 +280,18 @@ public class Postac {
 		if (this.iloscReakcji < akcja.getKosztReakcje()) {
 			return false;
 		}
-		else {
-			this.iloscReakcji -= akcja.getKosztReakcje();
-		}
 		
 		
 		if (this.prawaRekaAktywna) {
-			if (this.iloscAkcjiR < akcja.getKosztAkcje()) {
+			if (this.iloscAkcjiR < akcja.getKosztAkcje())
 				return false;
-			}
-			else {
-				this.iloscAkcjiR -= akcja.getKosztAkcje();
-				return true;
-			}
 		}
 		else {
-			if (this.getIloscAkcjiL() < akcja.getKosztAkcje()) {
+			if (this.iloscAkcjiL < akcja.getKosztAkcje())
 				return false;
-			}
-			else {
-				this.iloscAkcjiL -= akcja.getKosztAkcje();
-				return true;
-			}
 		}
+		
+		return true;
 	}
 	
 	public void zaplacZaAkcje(Akcja akcja) {
@@ -292,6 +300,12 @@ public class Postac {
 			this.iloscAkcjiR -= akcja.getKosztAkcje();
 		else 
 			this.iloscAkcjiL -= akcja.getKosztAkcje();
+	}
+	
+	public void resetAkcji() {
+		this.iloscAkcjiL = this.maxIloscAkcjiL;
+		this.iloscAkcjiR = this.maxIloscAkcjiR;
+		this.iloscReakcji = this.maxIloscReakcji;
 	}
 	
 	

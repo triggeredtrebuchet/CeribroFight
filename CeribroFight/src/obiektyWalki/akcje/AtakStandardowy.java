@@ -22,7 +22,7 @@ public class AtakStandardowy implements Akcja{
 			if (odbiorca.getGarda() > 0)
 				changeLog.obrazeniaGardaDlaOdbiorcy = bronAtk.obrazeniaGarda(wykonawca.getCechy());
 			else
-				changeLog.obrazeniaGardaDlaOdbiorcy = bronAtk.obrazeniaCialo(wykonawca.getCechy()); // po co ja dawalem wyjatek do sumy??? tyle z tym klopotu
+				changeLog.obrazeniaHPDlaOdbiorcy = bronAtk.obrazeniaCialo(wykonawca.getCechy()); // po co ja dawalem wyjatek do sumy??? tyle z tym klopotu
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,9 +1,9 @@
 package framework;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import obiektyWalki.Cechy;
 import obiektyWalki.ChangeLog;
 import obiektyWalki.Postac;
+import obiektyWalki.Sedzia;
 import obiektyWalki.akcje.Akcja;
 import obiektyWalki.akcje.AtakStandardowy;
 import obiektyWalki.bronie.Bron;
@@ -23,12 +24,10 @@ import obiektyWalki.bronie.Bron;
  *  TODO zrobic zapytanie i update
  */
 public class MainFrame extends JFrame{
-
 	Color kolorPaneluMapa = new Color(60,10,20);		//kolorki gradientu w tle
 	Color kolorSrodka = new Color(60,20,50);
 	Color kolorPaneluPostacie = new Color(31,40,102);
 	Color kolorPaneluAkcje = new Color(60,10,20);
-	
 	PanelMapa panelMapa = new PanelMapa(this.kolorPaneluMapa, this.kolorSrodka);
 	PanelInfo panelInfo = new PanelInfo(this, this.kolorSrodka, this.kolorPaneluPostacie, this.kolorPaneluAkcje);
 	
@@ -46,40 +45,23 @@ public class MainFrame extends JFrame{
 		this.add(this.panelMapa);
 		this.add(this.panelInfo, BorderLayout.EAST);
 		
-		//---------------dodanie postaci do panelu panelPostacie
-		Postac kocor = new Postac("Kocor wrednyj",Color.black, 10, 10, 5, new Cechy(), new Bron(), new Bron());
-		kocor.pozX += 100;
-		kocor.pozY += 100;
-		kocor.pozAlpha = Math.PI * 3/4;
-		Postac krasnolod = new Postac("krasnolud Brzydkij",Color.BLUE, 10, 10, 5, new Cechy(), new Bron(), new Bron());
-		krasnolod.pozAlpha = -Math.PI * 1/4;
-		kocor.dodajAkcje(new AtakStandardowy());
-		try {
-			krasnolod.getCechy().rozwin("BD");
-			krasnolod.getCechy().rozwin("BD");
-			krasnolod.getCechy().rozwin("BD");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		this.panelInfo.dodajPostac(krasnolod);
-		this.panelInfo.dodajPostac(kocor);
-		
-		this.panelInfo.wyswietlAkcje(krasnolod);
-		this.panelInfo.wyswietlAkcje(kocor);
-		this.panelMapa.dodajPostac(krasnolod);
-		this.panelMapa.dodajPostac(kocor);
-		//---------------- blok powyzej to jedynie test - ma to byc obslugiwane przez sedzie, changelogi i zapytania
-		
-		
 		this.setVisible(true); // to ma byc zawsze na koncu
 	}
 
-	public void update(ChangeLog changelog) {
-		//TODO
+	public void update(ChangeLog changeLog) {
+		this.panelMapa.update();
+		if (changeLog.zapytanieORuch)
+			this.panelMapa.ruszaj(changeLog.wykonawca);
+		
+		this.panelInfo.update(changeLog);
+		this.setVisible(true);
 	}
 	public void wyslijZapytanie(Postac p, Akcja a) {
-		System.out.println(p);
-		System.out.println(a);
+		
+		ChangeLog ch;
+		ch = Sedzia.zapytanieOWykonanieAkcji(p, a);
+		System.out.println(ch);
+		this.update(ch);
 	}
-	
+
 }

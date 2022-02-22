@@ -37,7 +37,8 @@ public class PrzykladowaReakcja implements Akcja{
 	@Override
 	public boolean warunekSpelniony(Postac wykonawca, Postac odbiorca, ChangeLog changeLog) {
 		// TODO Auto-generated method stub
-		return false;
+		changeLog.informacjeZAkcji = "Wszystko jest Prawda";
+		return true;
 	}
 
 	@Override

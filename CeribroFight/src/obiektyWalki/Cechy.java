@@ -2,6 +2,8 @@ package obiektyWalki;
 
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 /*Klase Cechy mozna utozsamiac z blokiem cech z karty postaci Ceribro
  * jest utworzona na bazie stringow
  * suma(String) - zwraca sume
@@ -132,5 +134,104 @@ public class Cechy {
 		default:
 			throw new Exception("Nieprawidlowy skrot cechy dla funkcji \"rozwin\"");
 		}
+	}
+	
+	public int testSW(int mod, String name) {
+		String temp = JOptionPane.showInputDialog("Wynik rzutu kosci testu SW dla " + name);
+		int bias;
+		if (temp == "")
+			bias = (int) Math.floor(Math.random() * this.SW[1] + 1);
+		else
+			bias = Integer.parseInt(temp);
+		return this.SW[0] - bias + mod;
+	}
+	
+	public int testREF(int mod, String name) {
+		String temp = JOptionPane.showInputDialog("Wynik rzutu kosci testu REF dla " + name);
+		int bias;
+		if (temp == "")
+			bias = (int) Math.floor(Math.random() * this.REF[1] + 1);
+		else
+			bias = Integer.parseInt(temp);
+		return this.REF[0] - bias + mod;
+	}
+	
+	public int testZW(int mod, String name) {
+		String temp = JOptionPane.showInputDialog("Wynik rzutu kosci testu ZW dla " + name);
+		int bias;
+		if (temp.equals(""))
+			bias = (int) Math.floor(Math.random() * this.ZW[1] + 1);
+		else
+			bias = Integer.parseInt(temp);
+		return this.ZW[0] - bias + mod;
+	}
+	
+	public int testBD(int mod, String name) {
+		String temp = JOptionPane.showInputDialog("Wynik rzutu kosci testu BD dla " + name);
+		int bias;
+		if (temp == "")
+			bias = (int) Math.floor(Math.random() * this.BD[1] + 1);
+		else
+			bias = Integer.parseInt(temp);
+		return this.BD[0] - bias + mod;
+	}
+	
+	public int testINT(int mod, String name) {
+		String temp = JOptionPane.showInputDialog("Wynik rzutu kosci testu INT dla " + name);
+		int bias;
+		if (temp == "")
+			bias = (int) Math.floor(Math.random() * this.INT[1] + 1);
+		else
+			bias = Integer.parseInt(temp);
+		return this.INT[0] - bias + mod;
+	}
+	
+	public int testDB(int mod, String name) {
+		String temp = JOptionPane.showInputDialog("Wynik rzutu kosci testu DB dla " + name);
+		int bias;
+		if (temp == "")
+			bias = (int) Math.floor(Math.random() * this.DB[1] + 1);
+		else
+			bias = Integer.parseInt(temp);
+		return this.DB[0] - bias + mod;
+	}
+	
+	public int testCH(int mod, String name) {
+		String temp = JOptionPane.showInputDialog("Wynik rzutu kosci testu CH dla " + name);
+		int bias;
+		if (temp == "")
+			bias = (int) Math.floor(Math.random() * this.CH[1] + 1);
+		else
+			bias = Integer.parseInt(temp);
+		return this.CH[0] - bias + mod;
+	}
+	
+
+	public void setSW(int[] sW) {
+		SW = sW;
+	}
+
+	public void setREF(int[] rEF) {
+		REF = rEF;
+	}
+
+	public void setZW(int[] zW) {
+		ZW = zW;
+	}
+
+	public void setBD(int[] bD) {
+		BD = bD;
+	}
+
+	public void setINT(int[] iNT) {
+		INT = iNT;
+	}
+
+	public void setDB(int[] dB) {
+		DB = dB;
+	}
+
+	public void setCH(int[] cH) {
+		CH = cH;
 	}
 }

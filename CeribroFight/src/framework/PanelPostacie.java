@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import obiektyWalki.Cechy;
 import obiektyWalki.Postac;
+import obiektyWalki.Sedzia;
 import obiektyWalki.akcje.AtakStandardowy;
 import obiektyWalki.bronie.Bron;
 
@@ -37,6 +38,10 @@ public class PanelPostacie extends JPanel{
 		this.color2 = kolor2;
 		this.setLayout(null); 
 		this.panelInfo = panelInfo;
+		for(int i = 0; i < Sedzia.dostepnePostacie.size(); i++) {
+			this.dodajPostac(Sedzia.dostepnePostacie.get(i), i);
+		}
+		
 	}
 	
 	public void dodajPostac(Postac postac, int n) {
@@ -56,6 +61,12 @@ public class PanelPostacie extends JPanel{
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
     }
+	
+	public void update() {
+		for(AwatarPostac aw: this.awatary) {
+			aw.update();
+		}
+	}
 
 }
 

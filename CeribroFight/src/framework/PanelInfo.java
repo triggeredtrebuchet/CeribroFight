@@ -16,7 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import obiektyWalki.ChangeLog;
 import obiektyWalki.Postac;
+import obiektyWalki.Sedzia;
 import obiektyWalki.akcje.Akcja;
 
 /*
@@ -28,8 +30,6 @@ public class PanelInfo extends JPanel implements ActionListener{
 	
 	PanelPostacie panelPostacie;
 	PanelAkcje panelAkcje;
-	int iloscPostaci = 0;
-    ArrayList<Postac> postacie = new ArrayList<Postac>();
     MainFrame mainFrame;
 	
 	
@@ -47,24 +47,18 @@ public class PanelInfo extends JPanel implements ActionListener{
 		this.add(this.panelPostacie);
 	}
 	
-	public void dodajPostac(Postac postac) {
-		this.postacie.add(postac);
-		this.panelPostacie.dodajPostac(postac, this.iloscPostaci);
-		this.iloscPostaci++;
-	}
-	
 	public void wyswietlAkcje(Postac postac) {
 		this.panelAkcje.wyswietlAkcje(postac);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		for(int i = 0; i < this.iloscPostaci; i++) {
+		for(int i = 0; i < Sedzia.dostepnePostacie.size(); i++) {
 			if ( e.getSource().equals(this.panelPostacie.awatary.get(i))) {
 				if(this.panelAkcje.wyswietlaReakcje)
-					this.panelAkcje.wyswietlAkcje(this.postacie.get(i));
+					this.panelAkcje.wyswietlAkcje(Sedzia.dostepnePostacie.get(i));
 				else
-					this.panelAkcje.wyswietlReakcje(this.postacie.get(i));
+					this.panelAkcje.wyswietlReakcje(Sedzia.dostepnePostacie.get(i));
 				break;
 				}
 		}
@@ -81,6 +75,20 @@ public class PanelInfo extends JPanel implements ActionListener{
 		
 		
 		this.mainFrame.setVisible(true);
+	}
+	
+	public void update(ChangeLog changeLog) {
+		this.panelPostacie.update();
+		
+		if (changeLog.zaMaloAkcji)
+			this.panelAkcje.zmienReke();
+		
+		if (changeLog.zapytanieOReakcje)
+			this.panelAkcje.wyswietlReakcje(changeLog.kolejnaDomyslniePostac);
+		else
+			if(changeLog.kolejnaDomyslniePostac != null)
+				this.panelAkcje.wyswietlAkcje(changeLog.kolejnaDomyslniePostac);
+		
 	}
 	
 
